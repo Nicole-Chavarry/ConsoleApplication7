@@ -5,12 +5,14 @@
 
 using namespace std::chrono;
 
+// Función para medir el tiempo necesario para insertar elementos al principio de un vector y una lista
 int durationCheck() {
     const int NUM_OPERATIONS = 100000;
 
     std::vector<int> vec;
     std::list<int> lst;
 
+    // Mida el tiempo necesario para insertar elementos al principio de una lista
     auto start = high_resolution_clock::now();
     for (int i = 0; i < NUM_OPERATIONS; ++i) {
         lst.push_front(i);
@@ -19,6 +21,7 @@ int durationCheck() {
     auto duration_list = duration_cast<milliseconds>(stop - start);
     std::cout << "List time: " << duration_list.count() << " ms\n";
 
+    // Mida el tiempo necesario para insertar elementos al principio de un vector
     start = high_resolution_clock::now();
     for (int i = 0; i < NUM_OPERATIONS; ++i) {
         vec.insert(vec.begin(), i);
@@ -30,8 +33,9 @@ int durationCheck() {
     return 0;
 }
 
+// Función para medir el tamaño de un vector y una lista
 int sizeCheck() {
-    const int NUM_ELEMENTS = 100000;  // Количество элементов
+    const int NUM_ELEMENTS = 100000;  // Number of elements
 
     std::vector<int> vec;
     std::list<int> lst;
@@ -41,12 +45,14 @@ int sizeCheck() {
         lst.push_back(i);
     }
 
+    //Calcular el tamaño de un vector
     std::cout << "Size of std::vector: " << sizeof(std::vector<int>) + (sizeof(int) * vec.capacity()) << " bytes\n";
+
+    // Calcular el tamaño de una lista
     std::cout << "Size of std::list: " << sizeof(std::list<int>) + (sizeof(int) + 2 * sizeof(void*)) * lst.size() << " bytes\n";
 
     return 0;
 };
-
 
 int main() {
     sizeCheck();
